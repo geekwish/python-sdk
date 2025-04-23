@@ -367,6 +367,7 @@ You can mount the SSE server to an existing ASGI server using the `sse_app` meth
 ```python
 from starlette.applications import Starlette
 from starlette.routing import Mount, Host
+from starlette.staticfiles import StaticFiles
 from mcp.server.fastmcp import FastMCP
 
 
@@ -379,6 +380,7 @@ mcp_mount_path = '/mcp'
 app = Starlette(
     routes=[
         Mount(mcp_mount_path, app=mcp.sse_app(mcp_mount_path=mcp_mount_path)),
+        Mount('/static', app=StaticFiles(directory='static'), name="static")
     ]
 )
 
